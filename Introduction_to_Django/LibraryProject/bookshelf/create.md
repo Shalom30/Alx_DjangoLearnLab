@@ -1,2 +1,2 @@
 #create Book
-Book.objects.create(title = "1984", author = "George orwell", publication_year = "1949")
+Book.objects.create(title = "1984", author = "George Orwell", publication_year = "1949")
