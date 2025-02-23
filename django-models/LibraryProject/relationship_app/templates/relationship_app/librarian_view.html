@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Librarian Dashboard</title>
+</head>
+<body>
+    <h1>Welcome Librarian {{ user.username }}</h1>
+    {% if library %}
+        <h2>Your Library: {{ library.name }}</h2>
+    {% endif %}
+    <!-- Add librarian-specific content -->
+</body>
+</html>
