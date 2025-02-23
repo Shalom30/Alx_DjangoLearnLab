@@ -19,4 +19,13 @@ urlpatterns = [
     path('logout/', 
          LogoutView.as_view(template_name='relationship_app/logout.html'), 
          name='logout'),
+    path('register/', register, name='register'),
+]
+
+from django.urls import path
+from .views import register  # Not register_view
+
+urlpatterns = [
+    # ... other paths
+    
 ]

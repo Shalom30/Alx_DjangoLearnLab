@@ -21,11 +21,3 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('relationship_app.urls')),
 ]
-
-from django.urls import path
-from .views import register  # Not register_view
-
-urlpatterns = [
-    # ... other paths
-    path('register/', register, name='register'),
-]
