@@ -3,7 +3,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from .views import (
     list_books,
     LibraryDetailView,
-    register  # Ensure this matches your view name
+    register  # Make sure this matches your view name
 )
 
 urlpatterns = [
@@ -12,7 +12,7 @@ urlpatterns = [
     path('library/<int:pk>/', LibraryDetailView.as_view(), name='library_detail'),
     
     # Authentication views
-    path('register/', register, name='register'),  # Direct reference to register view
+    path('register/', register, name='register'),  # Direct reference
     path('login/', 
          LoginView.as_view(template_name='relationship_app/login.html'), 
          name='login'),
