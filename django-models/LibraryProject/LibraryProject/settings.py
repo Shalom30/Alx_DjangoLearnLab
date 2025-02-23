@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bookshelf',
     'relationship_app',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'relationship_app',
 ]
 
 MIDDLEWARE = [
@@ -123,3 +126,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# Add to bottom of settings.py
+LOGIN_REDIRECT_URL = 'list_books'  # Where to redirect after login
+LOGOUT_REDIRECT_URL = 'login'      # Where to redirect after logout
