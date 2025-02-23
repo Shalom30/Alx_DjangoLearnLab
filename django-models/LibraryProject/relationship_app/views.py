@@ -94,12 +94,11 @@ def member_view(request):
         }
     )
     
-    from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth.decorators import login_required, permission_required
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required, permission_required  # Fixed import
 from .models import Book, Author, Library
-from .forms import BookForm  # Ensure you have this form created
+from .forms import BookForm
 
-# Add Book View
 @permission_required('relationship_app.can_add_book')
 def add_book(request):
     if request.method == 'POST':
@@ -111,7 +110,6 @@ def add_book(request):
         form = BookForm()
     return render(request, 'relationship_app/add_book.html', {'form': form})
 
-# Edit Book View
 @permission_required('relationship_app.can_change_book')
 def edit_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
@@ -124,7 +122,6 @@ def edit_book(request, book_id):
         form = BookForm(instance=book)
     return render(request, 'relationship_app/edit_book.html', {'form': form})
 
-# Delete Book View
 @permission_required('relationship_app.can_delete_book')
 def delete_book(request, book_id):
     book = get_object_or_404(Book, id=book_id)
@@ -132,5 +129,3 @@ def delete_book(request, book_id):
         book.delete()
         return redirect('list_books')
     return render(request, 'relationship_app/delete_book.html', {'book': book})
-
-# Existing views remain below (list_books, register, etc.)
