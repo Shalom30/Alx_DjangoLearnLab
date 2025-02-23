@@ -23,6 +23,14 @@ class Library(models.Model):
 class Librarian(models.Model):
     name = models.CharField(max_length=100)
     library = models.OneToOneField(Library, on_delete=models.CASCADE)
+    
+class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    publication_year = models.PositiveIntegerField(null=True, blank=True)
+    
+    def __str__(self):
+        return self.title
 
     def __str__(self):
         return self.name
