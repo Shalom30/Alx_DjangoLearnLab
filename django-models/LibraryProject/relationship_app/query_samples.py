@@ -7,9 +7,10 @@ django.setup()
 
 from relationship_app.models import Author, Book, Library, Librarian
 
-# 1. Query all books by a specific author
+# 1. Query all books by a specific author (corrected)
 def get_books_by_author(author_name):
-    return Book.objects.filter(author__name=author_name)
+    author = Author.objects.get(name=author_name)
+    return Book.objects.filter(author=author)
 
 # 2. List all books in a library
 def get_books_in_library(library_name):
@@ -19,21 +20,26 @@ def get_books_in_library(library_name):
 # 3. Retrieve the librarian for a library
 def get_librarian_for_library(library_name):
     library = Library.objects.get(name=library_name)
-    return Librarian.objects.get(library=library)
+    return library.librarian  # Using OneToOne reverse relation
 
 # Example usage
 if __name__ == "__main__":
-    # Example: Get books by "J.K. Rowling"
-    jk_books = get_books_by_author("J.K. Rowling")
-    print("Books by J.K. Rowling:", list(jk_books))
-
-    # Example: Get books in "Central Library"
-    central_books = get_books_in_library("Central Library")
-    print("Books in Central Library:", list(central_books))
-
-    # Example: Get librarian of "Central Library"
     try:
+        # Example: Get books by "J.K. Rowling"
+        rowling_books = get_books_by_author("J.K. Rowling")
+        print("Books by Rowling:", [b.title for b in rowling_books])
+        
+        # Example: Get books in library
+        library_books = get_books_in_library("Central Library")
+        print("Library books:", [b.title for b in library_books])
+        
+        # Example: Get librarian
         librarian = get_librarian_for_library("Central Library")
-        print("Librarian:", librarian.name)
-    except Librarian.DoesNotExist:
-        print("No librarian found for this library")
+        print("Librarian:", librarian.name if librarian else "None")
+        
+    except Author.DoesNotExist:
+        print("Author not found")
+    except Library.DoesNotExist:
+        print("Library not found")
+    except Exception as e:
+        print("Error:", str(e))
