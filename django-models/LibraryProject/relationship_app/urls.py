@@ -3,16 +3,16 @@ from django.contrib.auth.views import LoginView, LogoutView
 from . import views
 
 urlpatterns = [
-    # Book and library views
+    # Book management URLs (updated to match exact requirements)
+    path('add_book/', views.add_book, name='add_book'),
+    path('edit_book/<int:book_id>/', views.edit_book, name='edit_book'),
+    
+    # Existing URLs
     path('books/', views.list_books, name='list_books'),
     path('library/<int:pk>/', views.LibraryDetailView.as_view(), name='library_detail'),
+    path('delete_book/<int:book_id>/', views.delete_book, name='delete_book'),
     
-    # Book management views
-    path('books/add/', views.add_book, name='add_book'),
-    path('books/edit/<int:book_id>/', views.edit_book, name='edit_book'),
-    path('books/delete/<int:book_id>/', views.delete_book, name='delete_book'),
-    
-    # Authentication views
+    # Authentication URLs
     path('register/', views.register, name='register'),
     path('login/', 
          LoginView.as_view(template_name='relationship_app/login.html'), 
