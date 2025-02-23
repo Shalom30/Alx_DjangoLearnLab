@@ -16,21 +16,18 @@ class LibraryDetailView(DetailView):
     template_name = 'relationship_app/library_detail.html'
     
 
-# Function-based view using Book.objects.all()
+# Function-based view
 def list_books(request):
-    books = Book.objects.all()  # Explicit use of Book.objects.all()
-    return render(request, 'relationship_app/list_books.html', {
-        'books': books
-    })
+    books = Book.objects.all()
+    return render(request, 'relationship_app/list_books.html', {'books': books})
 
-# Class-based view using Library model
+# Class-based view
 class LibraryDetailView(DetailView):
-    model = Library
+    model = Library  # Requires explicit Library import
     context_object_name = 'library'
     template_name = 'relationship_app/library_detail.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Explicitly get all books for the library
         context['books'] = self.object.books.all()
         return context
