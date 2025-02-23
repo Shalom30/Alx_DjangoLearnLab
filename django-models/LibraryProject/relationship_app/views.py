@@ -50,3 +50,22 @@ class LibraryDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         context['books'] = self.object.books.all()
         return context
+      
+      
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.shortcuts import render
+
+def check_admin(user):
+    return (
+        user.is_authenticated and 
+        hasattr(user, 'userprofile') and 
+        user.userprofile.role == 'Admin'
+    )
+
+@login_required
+@user_passes_test(check_admin, login_url='/login/')
+def admin_view(request):
+    # Add admin-specific context or logic here
+    return render(request, 'relationship_app/admin_view.html', {
+        'user': request.user
+    })
