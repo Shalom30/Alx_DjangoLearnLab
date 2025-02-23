@@ -69,3 +69,27 @@ def admin_view(request):
     return render(request, 'relationship_app/admin_view.html', {
         'user': request.user
     })
+    
+# For Librarian View
+@login_required
+@user_passes_test(check_librarian, login_url='/login/')
+def librarian_view(request):
+    return render(
+        request, 
+        'relationship_app/librarian_view.html',  # Explicit template path
+        {'user': request.user}
+    )
+
+# For Member View
+@login_required
+@user_passes_test(check_member, login_url='/login/')
+def member_view(request):
+    books = Book.objects.all()
+    return render(
+        request,
+        'relationship_app/member_view.html',  # Explicit template path
+        {
+            'user': request.user,
+            'books': books
+        }
+    )
