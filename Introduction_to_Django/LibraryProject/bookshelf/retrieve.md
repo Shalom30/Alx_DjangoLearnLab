@@ -1,5 +1,9 @@
+# Retrieve a Book Entry
+
+To retrieve a book from the database using Django's ORM, use the `get` method:
+
+```python
+from bookshelf.models import Book
+
 book = Book.objects.get(title="1984")
-print(book.title, book.author, book.publication_year)
-
-
-#Output: 1984 George Orwell 1949
+print(f"Title: {book.title}, Author: {book.author}, Year: {book.publication_year}")

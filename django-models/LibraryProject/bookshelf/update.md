@@ -1,8 +1,22 @@
-#update the publication year of the book
-book = Book.objects.get(id=1)
-book.title = "Nineteen Eghty-Four"  # Corrected publication year
-book.save()  # Save changes to the database
 
-#verify the update
-updated_book = Book.objects.get(id=1)
-print(updated_book.publication_year)  # Output: Nineteen Eighty-Four
+---
+
+### **`update.md`**  
+```md
+## Updating a Book Instance
+
+```python
+from bookshelf.models import Book
+
+# Retrieve the book instance
+book = Book.objects.get(title="1984")
+
+# Update the title
+book.title = "Nineteen Eighty-Four"
+
+# Save changes
+book.save()
+
+# Display updated book
+print(book)
+#Expected Output:<Book: Nineteen Eighty-Four by George Orwell>
