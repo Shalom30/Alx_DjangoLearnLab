@@ -7,7 +7,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic.detail import DetailView
 from django.contrib.auth import views as auth_views  # Built-in authentication views
 from .models import Library
-
+from django.contrib.auth.decorators import permission_require
 from .models import UserProfile, Book, Library
 from .forms import BookForm
 
