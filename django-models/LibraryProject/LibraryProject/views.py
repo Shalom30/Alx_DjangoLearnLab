@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from .models import Book, Author, Library
-from .models import Library
+
 
 # Function-based view
 def list_books(request):
